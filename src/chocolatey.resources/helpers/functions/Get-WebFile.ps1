@@ -26,7 +26,8 @@ param(
   Write-Debug "Running 'Get-WebFile' for $fileName with url:`'$url`', userAgent: `'$userAgent`' ";
   #if ($url -eq '' return)
   $req = [System.Net.HttpWebRequest]::Create($url);
-  $defaultCreds = [System.Net.CredentialCache]::DefaultCredentials
+  $defaultCreds = Get-DefaultProxyCredentials
+  #$defaultCreds = [System.Net.CredentialCache]::DefaultCredentials
   if ($defaultCreds -ne $null) {
     $req.Credentials = $defaultCreds
   }
